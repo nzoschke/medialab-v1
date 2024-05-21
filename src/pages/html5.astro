@@ -1,0 +1,56 @@
+---
+import type { Collection } from "@components/collection";
+
+const res = await fetch(`${Astro.url.origin}/collection.json`);
+const collection = (await res.json()) as Collection;
+---
+
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="description" content="" />
+
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:alt" content="" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.png" />
+
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#fafafa" />
+  </head>
+
+  <body class="m-4 space-y-4">
+    <div class="">
+      <p>{collection.title} by {collection.author}</p>
+      <p class="italic">{collection.description}</p>
+    </div>
+
+    <ul class="space-y-4">
+      {
+        collection.playlists.map((playlist, pi) => (
+          <>
+            <li class="font-bold">
+              {pi.toString().padStart(2, "0")}. {playlist.title} by {playlist.author}
+            </li>
+            <ul class="">
+              {playlist.tracks.map((track, ti) => (
+                <li>
+                  {ti.toString().padStart(2, "0")}. {track.title}
+                </li>
+              ))}
+            </ul>
+          </>
+        ))
+      }
+    </ul>
+  </body>
+</html>
