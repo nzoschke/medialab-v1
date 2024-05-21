@@ -11,16 +11,21 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@astrojs/svelte": "^5.4.0",
+    "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.8.6",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.7.0",
     "@prettier/plugin-xml": "^3.4.1",
+    "daisyui": "^4.11.1",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-svelte": "^3.2.3",
-    "prettier-plugin-tailwindcss": "^0.5.14"
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "svelte": "5.0.0-next.137"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
