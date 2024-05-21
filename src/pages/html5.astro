@@ -11,7 +11,6 @@ const collection = (await res.json()) as Collection;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title></title>
-    <link rel="stylesheet" href="css/style.css" />
     <meta name="description" content="" />
 
     <meta property="og:title" content="" />
@@ -26,9 +25,25 @@ const collection = (await res.json()) as Collection;
 
     <link rel="manifest" href="site.webmanifest" />
     <meta name="theme-color" content="#fafafa" />
+
+    <script>
+      const audio = document.getElementsByTagName("audio")[0] as HTMLAudioElement;
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const el = e.target as HTMLButtonElement;
+          const link = el.dataset.link;
+          if (!link) return;
+
+          audio.src = link;
+          audio.play();
+        });
+      });
+    </script>
   </head>
 
   <body class="m-4 space-y-4">
+    <audio></audio>
     <div class="">
       <p>{collection.title} by {collection.author}</p>
       <p class="italic">{collection.description}</p>
@@ -44,7 +59,10 @@ const collection = (await res.json()) as Collection;
             <ul class="">
               {playlist.tracks.map((track, ti) => (
                 <li>
-                  {ti.toString().padStart(2, "0")}. {track.title}
+                  <button data-link={track.link} class="h-8 w-8 rounded bg-blue-500 text-center hover:bg-blue-700">
+                    {ti.toString().padStart(2, "0")}
+                  </button>
+                  {track.title}
                 </li>
               ))}
             </ul>
