@@ -10,8 +10,25 @@ pnpm create astro@latest
 pnpm install -D @prettier/plugin-xml prettier prettier-plugin-astro prettier-plugin-astro prettier-plugin-svelte prettier-plugin-tailwindcss
 ```
 
+package.json:
+
+```json
+{
+  "prettier": {
+    "plugins": ["@prettier/plugin-xml", "prettier-plugin-astro", "prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+    "printWidth": 160,
+    "xmlQuoteAttributes": "double",
+    "xmlWhitespaceSensitivity": "ignore"
+  }
+}
+```
+
+## Lint Staged
+
 ```bash
-pnpm dlx mrm@2 lint-staged
+pnpm install -D husky lint-staged
+pnpm exec husky init
+echo "pnpm exec lint-staged" > .husky/pre-commit
 ```
 
 package.json:
@@ -20,12 +37,6 @@ package.json:
 {
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
-  },
-  "prettier": {
-    "plugins": ["@prettier/plugin-xml", "prettier-plugin-astro", "prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
-    "printWidth": 160,
-    "xmlQuoteAttributes": "double",
-    "xmlWhitespaceSensitivity": "ignore"
   }
 }
 ```
