@@ -1,54 +1,64 @@
-# Astro Starter Kit: Basics
+# GIT Media Lab
 
-```sh
-npm create astro@latest -- --template basics
+Building music and video apps is easier than ever, once you figure out HTML Audio, HTML Video, Web Audio, Canvas and other web technology to support multi-media.
+
+This is an app that demonstrates media pieces configured correctly and explained in depth. See [the docs folder](src/content/doc) for detailed guides about audio, video, music APIs, metadata and more.
+
+## Quick Start
+
+This project uses:
+
+- Astro
+- TypeScript
+- Node
+- pnpm
+
+Install the CLI tools
+
+```bash
+brew install node
+npm install -g pnpm
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### Get the app
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+We start by getting and testing `medialab`:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+git clone https://github.com/nzoschke/medialab.git
+cd medialab
+pnpm install
+pnpm test -- --run
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+This gives us confidence in our TS / JS / web environment.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Develop the app
 
-Any static assets, like images, can be placed in the `public/` directory.
+We can then build the app and start a development server:
 
-## 🧞 Commands
+```bash
+pnpm run dev
 
-All commands are run from the root of the project, from a terminal:
+> medialab@0.0.1 dev
+> astro dev
+ astro  v4.8.6 ready in 285 ms
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+┃ Local    http://localhost:4321/
+```
 
-## 👀 Want to learn more?
+Now we can access our web app on [http://localhost:4321/](http://localhost:4321/).
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This gives us confidence in our development environment.
+
+## Docs
+
+Check out [the docs folder](src/content/doc) where each component is explained in more detail.
+
+## Contributing
+
+Find a bug or see a way to improve the project? [Open an issue](https://github.com/nzoschke/medialab/issues).
+
+## Sponsors
+
+This project is sponsored by [JukeLab](https://jukelab.com) and [VizLab](https://vizlab.app).
