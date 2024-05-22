@@ -59,9 +59,15 @@ const collection = (await res.json()) as Collection;
             <ul class="">
               {playlist.tracks.map((track, ti) => (
                 <li>
-                  <button data-link={track.link} class="h-8 w-8 rounded bg-blue-500 text-center hover:bg-blue-700">
-                    {ti.toString().padStart(2, "0")}
-                  </button>
+                  {track.link == "" ? (
+                    <button disabled class="h-8 w-8 rounded bg-blue-300 text-center">
+                      {ti.toString().padStart(2, "0")}
+                    </button>
+                  ) : (
+                    <button data-link={track.link} class="h-8 w-8 rounded bg-blue-500 text-center hover:bg-blue-700">
+                      {ti.toString().padStart(2, "0")}
+                    </button>
+                  )}
                   {track.title}
                 </li>
               ))}
