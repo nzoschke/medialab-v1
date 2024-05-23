@@ -1,13 +1,13 @@
 /// <reference types="@types/spotify-web-playback-sdk"/>
 
 import { type Devices } from "@spotify/web-api-ts-sdk";
-import { type Options, PlayerState } from "@components/audio/player";
+import { type Options, State } from "@components/audio/player";
 
 export const Player = (opts: Options) => {
   let accessToken = ""; // https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
   let deviceId = "";
   let player: Spotify.Player | undefined;
-  let playbackState = PlayerState();
+  let _state = State();
 
   const _log = (msg: string) => {
     if (opts.onLog) return opts.onLog(msg);
@@ -39,9 +39,9 @@ export const Player = (opts: Options) => {
         // filter and dedup Spotify events
         if (e == undefined) return;
 
-        const ps = toPlayerState(e);
-        if (playbackState.paused == ps.paused && playbackState.position == ps.position && playbackState.uri == ps.uri) return;
-        playbackState = ps;
+        const ps = toState(e);
+        if (_state.paused == ps.paused && _state.position == ps.position && _state.uri == ps.uri) return;
+        _state = ps;
 
         const {
           paused,
@@ -55,7 +55,7 @@ export const Player = (opts: Options) => {
         if (paused && position == 0 && previous_tracks?.findIndex((t) => t.id === current_track.id) !== -1) {
           if (endedTimeout == undefined) {
             _log(`ended track=${current_track.name}`);
-            if (opts.onEnd) opts.onEnd(playbackState);
+            if (opts.onEnd) opts.onEnd(_state);
           }
 
           endedTimeout = setTimeout(() => {
@@ -139,7 +139,7 @@ export const Player = (opts: Options) => {
   };
 
   const state = async () => {
-    return toPlayerState(await player?.getCurrentState());
+    return toState(await player?.getCurrentState());
   };
 
   return {
@@ -152,8 +152,8 @@ export const Player = (opts: Options) => {
   };
 };
 
-const toPlayerState = (s: Spotify.PlaybackState | null | undefined): PlayerState => {
-  if (!s) return PlayerState();
+const toState = (s: Spotify.PlaybackState | null | undefined): State => {
+  if (!s) return State();
 
   const t: Spotify.Track | undefined = s.track_window.current_track;
 

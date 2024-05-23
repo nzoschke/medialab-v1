@@ -1,5 +1,5 @@
 ---
-import { Collection } from "@components/media/collection";
+import { Collection } from "@components/meta/collection";
 
 const res = await fetch(`${Astro.url.origin}/collection.json`);
 const collection = (await res.json()) as Collection;

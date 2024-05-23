@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Collection, Playlist, Track, PlaylistTrack, shuffle } from "@components/media/collection";
+  import { Collection, Playlist, Track, PlaylistTrack, shuffle } from "@components/meta/collection";
   import { Player } from "@components/audio/spotify";
-  import { PlayerState } from "@components/audio/player";
+  import { State } from "@components/audio/player";
 
   let { accessToken = "" } = $props();
 
@@ -11,7 +11,7 @@
   let track = $state.frozen(PlaylistTrack(Playlist(), Track()));
 
   const player = Player({
-    onEnd: async (s: PlayerState) => {
+    onEnd: async (s: State) => {
       console.log("onEnd", s);
       await queueShift();
     },

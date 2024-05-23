@@ -1,4 +1,4 @@
-export interface PlayerState {
+export interface State {
   duration: number;
   paused: boolean;
   position: number;
@@ -8,10 +8,10 @@ export interface PlayerState {
 export interface Options {
   onInit?: (id: string) => void;
   onLog?: (msg: string) => void;
-  onEnd?: (s: PlayerState) => void;
+  onEnd?: (s: State) => void;
 }
 
-export const PlayerState = (): PlayerState => {
+export const State = (): State => {
   return {
     duration: 0,
     paused: true,
