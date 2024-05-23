@@ -3,21 +3,10 @@
   import { Context, Mic } from "@components/audio/input";
   import { throttle } from "@components/util";
 
-  const logs = $state<string[]>(["HELLO WORLD"]);
-
-  const _log = (msg: string) => {
-    logs.push(msg);
-  };
-
   onMount(async () => {
     const { Visualizer } = await import("@components/visual/Butterchurn");
 
-    window.onerror = (e) => {
-      _log(e.toString());
-    };
-
     let { context, node } = await Mic(null);
-    _log(`Mic state=${context.state}`);
 
     const canvas = document.getElementsByTagName("canvas")[0]!;
     const viz = Visualizer(context, node, canvas);
@@ -37,12 +26,4 @@
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
   <canvas class="block h-full w-full"></canvas>
-
-  <footer class="text-x footer z-50 min-h-48 items-center bg-neutral p-4 text-green-400">
-    <div class="flex h-full w-full flex-col-reverse overflow-auto leading-none">
-      {#each logs as log}
-        <pre><code>{log}</code></pre>
-      {/each}
-    </div>
-  </footer>
 </div>
