@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Collection, Playlist, Track, PlaylistTrack, shuffle } from "@components/collection";
+  import { Collection, Playlist, Track, PlaylistTrack, shuffle } from "@components/media/collection";
   import { Audio } from "@components/audio/spotify";
   import { PlaybackState } from "@components/audio/player";
 
