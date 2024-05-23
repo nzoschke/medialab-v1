@@ -4,7 +4,7 @@
   import { throttle } from "@components/util";
 
   onMount(async () => {
-    const { Visualizer } = await import("@components/Butterchurn");
+    const { Visualizer } = await import("@components/visual/Butterchurn");
 
     let { context, node } = await Mic(null);
     const canvas = document.getElementsByTagName("canvas")[0]!;
