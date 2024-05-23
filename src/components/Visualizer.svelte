@@ -10,16 +10,14 @@
     const canvas = document.getElementsByTagName("canvas")[0]!;
     const viz = Visualizer(context, node, canvas);
 
-    const observer = new ResizeObserver(
+    new ResizeObserver(
       throttle(() => {
         viz.resize(window.innerWidth, window.innerHeight);
       }, 500),
-    );
-    observer.observe(canvas);
+    ).observe(canvas);
 
     await viz.fetchPreset(
       "https://nzoschke.github.io/vizlab-presets/Presets/Dancer/Infect_Mirror/HDFX_Trend_NDropFX_with_AdamFX-Hexcollie-Armandio_C-Geiss-Martin_nOtherfoUrmKinGzFX_A.json",
-      // "https://nzoschke.github.io/vizlab-presets/Presets//Dancer/Glowsticks/Tripgnosis-Sparkler_Rave.json",
       0,
     );
   });
