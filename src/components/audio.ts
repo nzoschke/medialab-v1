@@ -5,6 +5,12 @@ export interface PlaybackState {
   uri: string;
 }
 
+export interface Options {
+  onInit?: (id: string) => void;
+  onLog?: (msg: string) => void;
+  onEnd?: (s: PlaybackState) => void;
+}
+
 export const PlaybackState = (): PlaybackState => {
   return {
     duration: 0,

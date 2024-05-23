@@ -1,15 +1,20 @@
 /// <reference types="@types/spotify-web-playback-sdk"/>
 
 import { type Devices } from "@spotify/web-api-ts-sdk";
-import { PlaybackState } from "@components/audio";
+import { type Options, PlaybackState } from "@components/audio";
 
-export const Audio = () => {
+export const Audio = (opts: Options) => {
   // https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
   let accessToken =
     "BQDcLiEdND9HckOtI5cqIQmgdSnStvG7F2wmFIvrYacHfGnprdUQ7iOg4rIQ7RzMl6fiaYsu5YwuHb5TYyO8D5dt_UGnwuUADhFq469VqpfQnjpxzBaIW5Ma4pyu2Z6XDqZQhN8nf6a2SRvvEL_nmhMCLhkDATyDHUY_JaAoCVpRYvRuSVm94vj8rpT0SxZ3ysPxnQ";
   let deviceId = "";
   let player: Spotify.Player | undefined;
   let playbackState = PlaybackState();
+
+  const _log = (msg: string) => {
+    if (opts.onLog) return opts.onLog(msg);
+    console.log(msg);
+  };
 
   const connect = async () => {
     if (player != undefined) return true;
@@ -25,8 +30,9 @@ export const Audio = () => {
       });
 
       player.addListener("ready", ({ device_id }) => {
-        console.log(`ready deviceId=${device_id}`);
+        _log(`ready deviceId=${device_id}`);
         deviceId = device_id;
+        if (opts.onInit) opts.onInit(deviceId);
         resolve(true);
       });
 
@@ -45,13 +51,13 @@ export const Audio = () => {
           track_window: { current_track, previous_tracks },
         } = e;
 
-        console.log(`player_state_changed paused=${paused} position=${position} track=${current_track?.name}`);
+        _log(`player_state_changed paused=${paused} position=${position} track=${current_track?.name}`);
 
         // "debounce" multiple stopping events
         if (paused && position == 0 && previous_tracks?.findIndex((t) => t.id === current_track.id) !== -1) {
           if (endedTimeout == undefined) {
-            console.log(`ended track=${current_track.name}`);
-            window.dispatchEvent(new CustomEvent("ended"));
+            _log(`ended track=${current_track.name}`);
+            if (opts.onEnd) opts.onEnd(playbackState);
           }
 
           endedTimeout = setTimeout(() => {
@@ -61,27 +67,27 @@ export const Audio = () => {
       });
 
       player.addListener("not_ready", ({ device_id }) => {
-        console.log(`not_ready device=${device_id}`);
+        _log(`not_ready device=${device_id}`);
         reject(false);
       });
 
       player.addListener("initialization_error", ({ message }) => {
-        console.log("initialization_error", message);
+        _log(`initialization_error ${message}`);
         reject(false);
       });
 
       player.addListener("authentication_error", ({ message }) => {
-        console.log("authentication_error", message);
+        _log(`authentication_error ${message}`);
         reject(false);
       });
 
       player.addListener("account_error", ({ message }) => {
-        console.log("account_error", message);
+        _log(`account_error ${message}`);
         reject(false);
       });
 
       player.connect().then((ok) => {
-        console.log("connect", ok);
+        _log(`connect ${ok}`);
       });
 
       player.activateElement();
@@ -112,7 +118,7 @@ export const Audio = () => {
   };
 
   const play = async (uri: string) => {
-    console.log("play", uri);
+    _log(`play ${uri}`);
 
     await connect();
     await player?.activateElement();

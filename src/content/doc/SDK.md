@@ -40,11 +40,19 @@ This uses the [Astro web framework](https://astro.build/) which includes support
 ## Player Interface
 
 ```ts
-init()            : Promise<bool>
-play(uri: string) : Promise<bool>
-pauseResume()     : Promise<bool>
-state()           : Promise<PlayerState | undefined>
-onEnd((s: PlayerState) {})
+// initialize with optional callbacks
+interface Options {
+  onEnd?:   (s: PlaybackState)  => void
+  onInit?:  (id: string)        => void
+  onLog?:   (msg: string)       => void
+}
+
+init(opts: Options) : Promise<bool>
+
+// play, pause, and get state
+play(uri: string)   : Promise<bool>
+pauseResume()       : Promise<bool>
+state()             : Promise<PlaybackState | undefined>
 ```
 
 An example Spotify Web Playback player is included for local development. This requires manually getting an access key at the [developer.spotify.com tutorial](https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started).
