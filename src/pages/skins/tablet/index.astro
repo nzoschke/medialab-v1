@@ -4,6 +4,6 @@ import App from "@components/Player.svelte";
 
 <html class="h-screen w-screen overflow-hidden">
   <body>
-    <App client:load />
+    <App accessToken={import.meta.env.SPOTIFY_ACCESS_TOKEN} client:load />
   </body>
 </html>
