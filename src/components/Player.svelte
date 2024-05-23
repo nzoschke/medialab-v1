@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Collection, Playlist, Track, PlaylistTrack, shuffle } from "@components/collection";
-  import { Audio } from "@components/spotify";
-  import { PlaybackState } from "@components/audio";
+  import { Audio } from "@components/audio/spotify";
+  import { PlaybackState } from "@components/audio/player";
 
   let { accessToken = "" } = $props();
 

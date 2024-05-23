@@ -1,7 +1,7 @@
 /// <reference types="@types/spotify-web-playback-sdk"/>
 
 import { type Devices } from "@spotify/web-api-ts-sdk";
-import { type Options, PlaybackState } from "@components/audio";
+import { type Options, PlaybackState } from "@components/audio/player";
 
 export const Audio = (opts: Options) => {
   let accessToken = ""; // https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
