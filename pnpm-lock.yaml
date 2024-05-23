@@ -22,6 +22,9 @@ importers:
       butterchurn-presets:
         specifier: 3.0.0-beta.4
         version: 3.0.0-beta.4
+      obs-websocket-js:
+        specifier: ^5.0.5
+        version: 5.0.5
       tailwindcss:
         specifier: ^3.4.3
         version: 3.4.3
@@ -686,6 +689,10 @@ packages:
   "@jridgewell/trace-mapping@0.3.25":
     resolution: { integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ== }
 
+  "@msgpack/msgpack@2.8.0":
+    resolution: { integrity: sha512-h9u4u/jiIRKbq25PM+zymTyW6bhTzELvOoUd+AvYriWOAKpLGnIamaET3pnHYoI5iYphAHBI4ayx0MehR+VVPQ== }
+    engines: { node: ">= 10" }
+
   "@nodelib/fs.scandir@2.1.5":
     resolution: { integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g== }
     engines: { node: ">= 8" }
@@ -1154,6 +1161,9 @@ packages:
     resolution: { integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w== }
     engines: { node: ">= 8" }
 
+  crypto-js@4.2.0:
+    resolution: { integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q== }
+
   css-selector-tokenizer@0.8.0:
     resolution: { integrity: sha512-Jd6Ig3/pe62/qe5SBPTN8h8LeUg/pT4lLgtavPf7updwwHpvFzxvOQBHYj2LZDMjUnBzgvIUSjRcf6oT5HzHFg== }
 
@@ -1544,6 +1554,11 @@ packages:
   isexe@2.0.0:
     resolution: { integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw== }
 
+  isomorphic-ws@5.0.0:
+    resolution: { integrity: sha512-muId7Zzn9ywDsyXgTIafTry2sV3nySZeUDe6YedVd1Hvuuep5AsIlqK+XefWpYTyJG5e503F2xIuT2lcU6rCSw== }
+    peerDependencies:
+      ws: "*"
+
   jackspeak@3.1.2:
     resolution: { integrity: sha512-kWmLKn2tRtfYMF/BakihVVRzBKOxz4gJMiL2Rj91WnAB5TPZumSH99R/Yf1qE1u4uRimvCSJfm6hnxohXeEXjQ== }
     engines: { node: ">=14" }
@@ -1859,6 +1874,10 @@ packages:
   object-hash@3.0.0:
     resolution: { integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw== }
     engines: { node: ">= 6" }
+
+  obs-websocket-js@5.0.5:
+    resolution: { integrity: sha512-mSMqLXJ4z28jgwy7Ecv8CtpYh/xdbcn524kq0n6wT3kN6xkgWU/Zc6OtiVZo+gyyylC0anjehMLEVF+CDSwccw== }
+    engines: { node: ">12.0" }
 
   onetime@5.1.2:
     resolution: { integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg== }
@@ -2413,6 +2432,10 @@ packages:
     resolution: { integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA== }
     engines: { node: ">=12.20" }
 
+  type-fest@3.13.1:
+    resolution: { integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g== }
+    engines: { node: ">=14.16" }
+
   typesafe-path@0.2.2:
     resolution: { integrity: sha512-OJabfkAg1WLZSqJAJ0Z6Sdt3utnbzr/jh+NAHoyWHJe8CMSy79Gm085094M9nvTPy22KzTVn5Zq5mbapCI/hPA== }
 
@@ -2688,6 +2711,18 @@ packages:
   wrap-ansi@9.0.0:
     resolution: { integrity: sha512-G8ura3S+3Z2G+mkgNRq8dqaFZAuxfsxpBB8OCTGRTCtp+l/v9nbFNmCUP1BZMts3G1142MsZfn6eeUKrr4PD1Q== }
     engines: { node: ">=18" }
+
+  ws@8.17.0:
+    resolution: { integrity: sha512-uJq6108EgZMAl20KagGkzCKfMEjxmKvZHG7Tlq0Z6nOky7YF7aq4mOx6xK8TJ/i1LeK4Qus7INktacctDgY8Ow== }
+    engines: { node: ">=10.0.0" }
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ">=5.0.2"
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   y18n@5.0.8:
     resolution: { integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA== }
@@ -3271,6 +3306,8 @@ snapshots:
       "@jridgewell/resolve-uri": 3.1.2
       "@jridgewell/sourcemap-codec": 1.4.15
 
+  "@msgpack/msgpack@2.8.0": {}
+
   "@nodelib/fs.scandir@2.1.5":
     dependencies:
       "@nodelib/fs.stat": 2.0.5
@@ -3825,6 +3862,8 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
+  crypto-js@4.2.0: {}
+
   css-selector-tokenizer@0.8.0:
     dependencies:
       cssesc: 3.0.0
@@ -4249,6 +4288,10 @@ snapshots:
       is-inside-container: 1.0.0
 
   isexe@2.0.0: {}
+
+  isomorphic-ws@5.0.0(ws@8.17.0):
+    dependencies:
+      ws: 8.17.0
 
   jackspeak@3.1.2:
     dependencies:
@@ -4742,6 +4785,20 @@ snapshots:
   object-assign@4.1.1: {}
 
   object-hash@3.0.0: {}
+
+  obs-websocket-js@5.0.5:
+    dependencies:
+      "@msgpack/msgpack": 2.8.0
+      crypto-js: 4.2.0
+      debug: 4.3.4
+      eventemitter3: 5.0.1
+      isomorphic-ws: 5.0.0(ws@8.17.0)
+      type-fest: 3.13.1
+      ws: 8.17.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
 
   onetime@5.1.2:
     dependencies:
@@ -5331,6 +5388,8 @@ snapshots:
 
   type-fest@2.19.0: {}
 
+  type-fest@3.13.1: {}
+
   typesafe-path@0.2.2: {}
 
   typescript-auto-import-cache@0.3.2:
@@ -5645,6 +5704,8 @@ snapshots:
       ansi-styles: 6.2.1
       string-width: 7.1.0
       strip-ansi: 7.1.0
+
+  ws@8.17.0: {}
 
   y18n@5.0.8: {}
 
