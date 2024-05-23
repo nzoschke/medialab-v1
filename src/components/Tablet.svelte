@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Collection, Playlist, Track, PlaylistTrack, shuffle } from "@components/collection";
-  import { Audio } from "@components/spotify";
-  import { PlaybackState } from "@components/audio";
+  import { Collection, Playlist, Track, PlaylistTrack, shuffle } from "@components/meta/collection";
+  import { Player } from "@components/audio/spotify";
+  import { State } from "@components/audio/player";
 
   let { accessToken = "" } = $props();
 
@@ -10,8 +10,8 @@
   let playlist = $state.frozen(Playlist());
   let track = $state.frozen(PlaylistTrack(Playlist(), Track()));
 
-  const audio = Audio({
-    onEnd: async (s: PlaybackState) => {
+  const player = Player({
+    onEnd: async (s: State) => {
       console.log("onEnd", s);
       await queueShift();
     },
@@ -23,7 +23,7 @@
     },
   });
 
-  audio.accessToken = accessToken;
+  player.accessToken = accessToken;
 
   let q = $state({
     queue: [] as PlaylistTrack[],
@@ -40,7 +40,7 @@
   const queuePush = async (pt: PlaylistTrack) => {
     q.queue.push(pt);
 
-    const s = await audio.state();
+    const s = await player.state();
     if (s.uri == "") await queueShift();
   };
 
@@ -50,7 +50,7 @@
 
     track = pt;
     q.history.unshift(pt);
-    await audio.play(pt.track.uri);
+    await player.play(pt.track.uri);
   };
 
   const queueShuffle = () => {
@@ -67,7 +67,7 @@
   };
 
   onMount(async () => {
-    await audio.init();
+    await player.init();
 
     const res = await fetch(`/collection.json`);
     collection = (await res.json()) as Collection;
