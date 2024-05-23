@@ -10,13 +10,10 @@
   };
 
   onMount(async () => {
-    _log("onMount");
-
     const { Visualizer } = await import("@components/visual/Butterchurn");
 
     window.onerror = (e) => {
       _log(e.toString());
-      // logs.push(e.toString());
     };
 
     let { context, node } = await Mic(null);
@@ -39,7 +36,7 @@
 </script>
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
-  <canvas class="block h-96 w-96"></canvas>
+  <canvas class="block h-full w-full"></canvas>
 
   <footer class="text-x footer z-50 min-h-48 items-center bg-neutral p-4 text-green-400">
     <div class="flex h-full w-full flex-col-reverse overflow-auto leading-none">
