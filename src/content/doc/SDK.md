@@ -42,7 +42,7 @@ This uses the [Astro web framework](https://astro.build/) which includes support
 ```ts
 init()            : Promise<bool>
 play(uri: string) : Promise<bool>
-pauseReume()      : Promise<bool>
+pauseResume()     : Promise<bool>
 state()           : Promise<PlayerState | undefined>
 onEnd((s: PlayerState) {})
 ```
