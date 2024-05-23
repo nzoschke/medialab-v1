@@ -1,5 +1,5 @@
 ---
-import type { Collection } from "@components/collection";
+import { Collection } from "@components/collection";
 
 const res = await fetch(`${Astro.url.origin}/collection.json`);
 const collection = (await res.json()) as Collection;
@@ -59,7 +59,12 @@ const collection = (await res.json()) as Collection;
             <ul class="">
               {playlist.tracks.map((track, ti) => (
                 <li>
-                  <button data-link={track.link} class="h-8 w-8 rounded bg-blue-500 text-center hover:bg-blue-700">
+                  <button
+                    class="h-8 w-8 rounded text-center"
+                    class:list={track.link == "" ? "bg-blue-200" : "bg-blue-500 hover:bg-blue-700"}
+                    data-link={track.link}
+                    disabled={track.link == "" ? true : undefined}
+                  >
                     {ti.toString().padStart(2, "0")}
                   </button>
                   {track.title}
