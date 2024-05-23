@@ -1,4 +1,4 @@
-export interface PlaybackState {
+export interface PlayerState {
   duration: number;
   paused: boolean;
   position: number;
@@ -8,10 +8,10 @@ export interface PlaybackState {
 export interface Options {
   onInit?: (id: string) => void;
   onLog?: (msg: string) => void;
-  onEnd?: (s: PlaybackState) => void;
+  onEnd?: (s: PlayerState) => void;
 }
 
-export const PlaybackState = (): PlaybackState => {
+export const PlayerState = (): PlayerState => {
   return {
     duration: 0,
     paused: true,

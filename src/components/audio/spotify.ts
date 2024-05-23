@@ -1,13 +1,13 @@
 /// <reference types="@types/spotify-web-playback-sdk"/>
 
 import { type Devices } from "@spotify/web-api-ts-sdk";
-import { type Options, PlaybackState } from "@components/audio/player";
+import { type Options, PlayerState } from "@components/audio/player";
 
-export const Audio = (opts: Options) => {
+export const Player = (opts: Options) => {
   let accessToken = ""; // https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
   let deviceId = "";
   let player: Spotify.Player | undefined;
-  let playbackState = PlaybackState();
+  let playbackState = PlayerState();
 
   const _log = (msg: string) => {
     if (opts.onLog) return opts.onLog(msg);
@@ -39,7 +39,7 @@ export const Audio = (opts: Options) => {
         // filter and dedup Spotify events
         if (e == undefined) return;
 
-        const ps = toPlaybackState(e);
+        const ps = toPlayerState(e);
         if (playbackState.paused == ps.paused && playbackState.position == ps.position && playbackState.uri == ps.uri) return;
         playbackState = ps;
 
@@ -139,7 +139,7 @@ export const Audio = (opts: Options) => {
   };
 
   const state = async () => {
-    return toPlaybackState(await player?.getCurrentState());
+    return toPlayerState(await player?.getCurrentState());
   };
 
   return {
@@ -152,8 +152,8 @@ export const Audio = (opts: Options) => {
   };
 };
 
-const toPlaybackState = (s: Spotify.PlaybackState | null | undefined): PlaybackState => {
-  if (!s) return PlaybackState();
+const toPlayerState = (s: Spotify.PlaybackState | null | undefined): PlayerState => {
+  if (!s) return PlayerState();
 
   const t: Spotify.Track | undefined = s.track_window.current_track;
 
