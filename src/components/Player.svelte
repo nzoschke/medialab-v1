@@ -4,6 +4,8 @@
   import { Audio } from "@components/spotify";
   import { PlaybackState } from "@components/audio";
 
+  let { accessToken = "" } = $props();
+
   let collection = $state.frozen(Collection());
   let playlist = $state.frozen(Playlist());
   let track = $state.frozen(PlaylistTrack(Playlist(), Track()));
@@ -20,6 +22,8 @@
       console.log("onLog", msg);
     },
   });
+
+  audio.accessToken = accessToken;
 
   let q = $state({
     queue: [] as PlaylistTrack[],

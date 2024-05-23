@@ -4,9 +4,7 @@ import { type Devices } from "@spotify/web-api-ts-sdk";
 import { type Options, PlaybackState } from "@components/audio";
 
 export const Audio = (opts: Options) => {
-  // https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
-  let accessToken =
-    "BQDcLiEdND9HckOtI5cqIQmgdSnStvG7F2wmFIvrYacHfGnprdUQ7iOg4rIQ7RzMl6fiaYsu5YwuHb5TYyO8D5dt_UGnwuUADhFq469VqpfQnjpxzBaIW5Ma4pyu2Z6XDqZQhN8nf6a2SRvvEL_nmhMCLhkDATyDHUY_JaAoCVpRYvRuSVm94vj8rpT0SxZ3ysPxnQ";
+  let accessToken = ""; // https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
   let deviceId = "";
   let player: Spotify.Player | undefined;
   let playbackState = PlaybackState();
@@ -145,6 +143,9 @@ export const Audio = (opts: Options) => {
   };
 
   return {
+    set accessToken(s: string) {
+      accessToken = s;
+    },
     init,
     play,
     state,
