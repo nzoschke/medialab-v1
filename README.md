@@ -1,6 +1,6 @@
 # GIT Media Lab
 
-Building music and video apps is easier than ever, once you figure out HTML Audio, HTML Video, Web Audio, Canvas and other web technology to support multi-media.
+Building music and video apps is easier than ever, once you figure out HTML Audio, HTML Video, Web Audio, Canvas and other web technology to support multimedia.
 
 This is an app that demonstrates media pieces configured correctly and explained in depth. See [the docs folder](src/content/doc) for detailed guides about audio, video, music APIs, metadata and more.
 
@@ -9,9 +9,10 @@ This is an app that demonstrates media pieces configured correctly and explained
 This project uses:
 
 - Astro
-- TypeScript
-- Node
-- pnpm
+- Svelte
+- TypeScript / Node / pnpm
+- MilkDrop / Butterchurn
+- OBS
 
 Install the CLI tools
 

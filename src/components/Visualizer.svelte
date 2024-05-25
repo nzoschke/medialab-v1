@@ -7,6 +7,7 @@
     const { Visualizer } = await import("@components/visual/Butterchurn");
 
     let { context, node } = await Mic(null);
+
     const canvas = document.getElementsByTagName("canvas")[0]!;
     const viz = Visualizer(context, node, canvas);
 
@@ -24,5 +25,5 @@
 </script>
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
-  <canvas class="block h-screen w-screen"></canvas>
+  <canvas class="block h-full w-full"></canvas>
 </div>

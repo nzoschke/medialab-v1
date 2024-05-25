@@ -1,0 +1,9 @@
+---
+import App from "@components/OBS.svelte";
+---
+
+<html class="h-screen w-screen overflow-hidden">
+  <body>
+    <App url={import.meta.env.OBS_URL} client:load />
+  </body>
+</html>

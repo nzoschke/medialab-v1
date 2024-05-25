@@ -3,14 +3,14 @@
 import { type Devices } from "@spotify/web-api-ts-sdk";
 import { type Options, State } from "@components/audio/player";
 
-export const Player = (opts: Options) => {
+export const Player = (opts?: Options) => {
   let accessToken = ""; // https://developer.spotify.com/documentation/web-playback-sdk/tutorials/getting-started
   let deviceId = "";
   let player: Spotify.Player | undefined;
   let _state = State();
 
   const _log = (msg: string) => {
-    if (opts.onLog) return opts.onLog(msg);
+    if (opts?.onLog) return opts.onLog(msg);
     console.log(msg);
   };
 
@@ -30,7 +30,7 @@ export const Player = (opts: Options) => {
       player.addListener("ready", ({ device_id }) => {
         _log(`ready deviceId=${device_id}`);
         deviceId = device_id;
-        if (opts.onInit) opts.onInit(deviceId);
+        if (opts?.onInit) opts.onInit(deviceId);
         resolve(true);
       });
 
@@ -55,7 +55,7 @@ export const Player = (opts: Options) => {
         if (paused && position == 0 && previous_tracks?.findIndex((t) => t.id === current_track.id) !== -1) {
           if (endedTimeout == undefined) {
             _log(`ended track=${current_track.name}`);
-            if (opts.onEnd) opts.onEnd(_state);
+            if (opts?.onEnd) opts.onEnd(_state);
           }
 
           endedTimeout = setTimeout(() => {

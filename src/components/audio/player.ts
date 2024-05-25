@@ -6,9 +6,9 @@ export interface State {
 }
 
 export interface Options {
+  onEnd?: (s: State) => void;
   onInit?: (id: string) => void;
   onLog?: (msg: string) => void;
-  onEnd?: (s: State) => void;
 }
 
 export const State = (): State => {
