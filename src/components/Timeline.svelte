@@ -27,13 +27,13 @@
     timeline.progress = ui.progress;
   });
 
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i <= 5; i++) {
     timeline.timeline.set(
       structure,
       {
         phrase: `phrase-${i}`,
         data: {
-          i,
+          duration: 1,
         },
       },
       i,
@@ -60,8 +60,24 @@
 >
   {ui.status == "play" ? "Pause" : "Play"}
 </button>
-<input type="range" min="0" max="1" step="0.001" bind:value={ui.progress} class="range" />
 
-{#each timeline.datas() as tw, i}
-  {tw.data.i}
-{/each}
+<input type="range" min="0" max="1" step="0.001" bind:value={ui.progress} class="range rounded-none" />
+
+<div class="relative flex h-6 w-full rounded-box">
+  {#each timeline.divs() as tw}
+    <div class="absolute h-6 border" style="left: {tw.left}%; width: {tw.width}%;"></div>
+  {/each}
+</div>
+
+<style>
+  /* https://github.com/saadeghi/daisyui/blob/master/src/components/styled/range.css */
+  ::-webkit-slider-thumb {
+    border-radius: 0;
+    width: 5px;
+    --filler-offset: 0rem;
+    box-shadow:
+      0 0 0 1px var(--range-shdw) inset,
+      var(--focus-shadow, 0 0),
+      calc(var(--filler-size) * -1 - var(--filler-offset)) 0 0 var(--filler-size);
+  }
+</style>

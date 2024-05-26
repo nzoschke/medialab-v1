@@ -51,13 +51,28 @@ export const Timeline = (opts?: Opts) => {
     state.progress = timeline.progress();
   };
 
-  const datas = () => {
-    const tws = timeline.getChildren(false, true, false) as gsap.core.Tween[];
-    return tws.filter((tw) => tw.data);
-  };
-
   return {
-    datas,
+    divs: () => {
+      const tws = timeline.getChildren(false, true, false).filter((tw) => tw.data) as gsap.core.Tween[];
+      return tws.map((tw, i) => {
+        const start = tw.startTime();
+        const next = tws.at(i + 1);
+        const end = next ? next.startTime() : tw.startTime();
+        const duration = end - start;
+
+        return {
+          data: tw.data,
+          duration,
+          end,
+          start,
+          left: (start / timeline.duration()) * 100,
+          width: (duration / timeline.duration()) * 100,
+        };
+      });
+    },
+    get duration() {
+      return timeline.duration();
+    },
     pauseResume: () => {
       if (state.status == "new") {
         state.status = "play";
@@ -79,8 +94,8 @@ export const Timeline = (opts?: Opts) => {
 
       if (state.status == "complete") {
         state.progress = 0;
-        state.status = "play";
         timeline.progress(0);
+        state.status = "play";
         timeline.play();
         return;
       }
@@ -90,6 +105,7 @@ export const Timeline = (opts?: Opts) => {
     },
     set progress(p: number) {
       state.progress = p;
+      timeline.progress(p);
     },
     timeline,
   };
