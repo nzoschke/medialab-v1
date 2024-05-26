@@ -22,6 +22,9 @@ importers:
       butterchurn-presets:
         specifier: 3.0.0-beta.4
         version: 3.0.0-beta.4
+      gsap:
+        specifier: ^3.12.5
+        version: 3.12.5
       obs-websocket-js:
         specifier: ^5.0.5
         version: 5.0.5
@@ -1409,6 +1412,9 @@ packages:
   gray-matter@4.0.3:
     resolution: { integrity: sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q== }
     engines: { node: ">=6.0" }
+
+  gsap@3.12.5:
+    resolution: { integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ== }
 
   has-flag@3.0.0:
     resolution: { integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw== }
@@ -4122,6 +4128,8 @@ snapshots:
       kind-of: 6.0.3
       section-matter: 1.0.0
       strip-bom-string: 1.0.0
+
+  gsap@3.12.5: {}
 
   has-flag@3.0.0: {}
 
