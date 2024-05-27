@@ -7,7 +7,7 @@
   });
 
   // bind timeline and UI state
-  const timeline = Timeline();
+  const timeline = $state(Timeline());
 
   let ui: State = $state({
     progress: 0,

@@ -7,6 +7,15 @@ export interface State {
 
 export type Status = "new" | "play" | "pause" | "complete";
 
+export interface Div {
+  data: any;
+  duration: number;
+  end: number;
+  start: number;
+  left: number;
+  width: number;
+}
+
 interface Opts {
   onStatus?: (s: Status) => void;
   onProgress?: (p: number) => void;
@@ -52,8 +61,8 @@ export const Timeline = (opts?: Opts) => {
   };
 
   return {
-    divs: () => {
-      const tws = timeline.getChildren(false, true, false).filter((tw) => tw.data) as gsap.core.Tween[];
+    divs: (): Div[] => {
+      const tws = timeline.getChildren(false, true, false) as gsap.core.Tween[];
       return tws.map((tw, i) => {
         const start = tw.startTime();
         const next = tws.at(i + 1);

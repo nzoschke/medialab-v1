@@ -5,7 +5,7 @@
     currentTime: 0,
     duration: 0,
     paused: true,
-    src: "influence.m4a",
+    src: "/influence.m4a",
     volume: 0.7,
   });
 

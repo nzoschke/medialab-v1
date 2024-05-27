@@ -66,3 +66,25 @@ export const Mic = async (label: string | null): Promise<Device> => {
     label: input.label,
   };
 };
+
+export const Resume = () => {
+  return {
+    resume: () => {
+      const ch = new BroadcastChannel("AUDIO");
+      ch.postMessage({
+        type: "RESUME",
+      });
+    },
+    onresume: async (context: AudioContext) => {
+      await new Promise<void>((resolve, _) => {
+        const ch = new BroadcastChannel("AUDIO");
+        ch.onmessage = async ({ data }) => {
+          if (data.type == "RESUME") {
+            await context.resume();
+            resolve();
+          }
+        };
+      });
+    },
+  };
+};

@@ -27,13 +27,12 @@ import butterchurn from "butterchurn";
  * @returns {Viz}
  */
 export const Visualizer = (audioContext, audioNode, canvas) => {
-  console.log(`canvas width=${canvas.width} height=${canvas.height}`);
-
   const viz = butterchurn.createVisualizer(audioContext, canvas, {
     width: canvas.width,
     height: canvas.height,
     pixelRatio: 1,
   });
+
   viz.connectAudio(audioNode);
 
   function animate() {
