@@ -9,13 +9,13 @@ importers:
     dependencies:
       "@astrojs/svelte":
         specifier: 5.4.0
-        version: 5.4.0(astro@4.8.6(sass@1.77.2)(typescript@5.4.5))(svelte@5.0.0-next.133)(typescript@5.4.5)(vite@5.2.11(sass@1.77.2))
+        version: 5.4.0(astro@4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(svelte@5.0.0-next.133)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       "@astrojs/tailwind":
         specifier: ^5.1.0
-        version: 5.1.0(astro@4.8.6(sass@1.77.2)(typescript@5.4.5))(tailwindcss@3.4.3)
+        version: 5.1.0(astro@4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(tailwindcss@3.4.3)
       astro:
         specifier: ^4.8.6
-        version: 4.8.6(sass@1.77.2)(typescript@5.4.5)
+        version: 4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5)
       butterchurn:
         specifier: 3.0.0-beta.4
         version: 3.0.0-beta.4
@@ -47,6 +47,9 @@ importers:
       "@spotify/web-api-ts-sdk":
         specifier: ^1.2.0
         version: 1.2.0
+      "@types/node":
+        specifier: ^20.12.12
+        version: 20.12.12
       "@types/spotify-web-playback-sdk":
         specifier: ^0.1.19
         version: 0.1.19
@@ -76,7 +79,7 @@ importers:
         version: 5.0.0-next.133
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(sass@1.77.2)
+        version: 1.6.0(@types/node@20.12.12)(sass@1.77.2)
 
 packages:
   "@alloc/quick-lru@5.2.0":
@@ -856,6 +859,9 @@ packages:
 
   "@types/nlcst@1.0.4":
     resolution: { integrity: sha512-ABoYdNQ/kBSsLvZAekMhIPMQ3YUZvavStpKYs7BjLLuKVmIMA0LUgZ7b54zzuWJRbHF80v1cNf4r90Vd6eMQDg== }
+
+  "@types/node@20.12.12":
+    resolution: { integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw== }
 
   "@types/spotify-web-playback-sdk@0.1.19":
     resolution: { integrity: sha512-Is7x9gMIMoERxE0uvb2SPFQoy5OR7nO1B24CJiaDAUIdq195OLTQedN95XJQtxB2mfm+zi2j3LvEtpPdHKnB3w== }
@@ -2462,6 +2468,9 @@ packages:
   ufo@1.5.3:
     resolution: { integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw== }
 
+  undici-types@5.26.5:
+    resolution: { integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA== }
+
   unherit@3.0.1:
     resolution: { integrity: sha512-akOOQ/Yln8a2sgcLj4U0Jmx0R5jpIg2IUyRrWOzmEbjBtGzBdHtSeFKgoEcoH4KYIG/Pb8GQ/BwtYm0GCq1Sqg== }
 
@@ -2863,10 +2872,10 @@ snapshots:
     dependencies:
       prismjs: 1.29.0
 
-  "@astrojs/svelte@5.4.0(astro@4.8.6(sass@1.77.2)(typescript@5.4.5))(svelte@5.0.0-next.133)(typescript@5.4.5)(vite@5.2.11(sass@1.77.2))":
+  "@astrojs/svelte@5.4.0(astro@4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(svelte@5.0.0-next.133)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))":
     dependencies:
-      "@sveltejs/vite-plugin-svelte": 3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(sass@1.77.2))
-      astro: 4.8.6(sass@1.77.2)(typescript@5.4.5)
+      "@sveltejs/vite-plugin-svelte": 3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
+      astro: 4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5)
       svelte: 5.0.0-next.133
       svelte2tsx: 0.6.27(svelte@5.0.0-next.133)(typescript@5.4.5)
       typescript: 5.4.5
@@ -2874,9 +2883,9 @@ snapshots:
       - supports-color
       - vite
 
-  "@astrojs/tailwind@5.1.0(astro@4.8.6(sass@1.77.2)(typescript@5.4.5))(tailwindcss@3.4.3)":
+  "@astrojs/tailwind@5.1.0(astro@4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5))(tailwindcss@3.4.3)":
     dependencies:
-      astro: 4.8.6(sass@1.77.2)(typescript@5.4.5)
+      astro: 4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5)
       autoprefixer: 10.4.19(postcss@8.4.38)
       postcss: 8.4.38
       postcss-load-config: 4.0.2(postcss@8.4.38)
@@ -3400,26 +3409,26 @@ snapshots:
 
   "@spotify/web-api-ts-sdk@1.2.0": {}
 
-  "@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(sass@1.77.2)))(svelte@5.0.0-next.133)(vite@5.2.11(sass@1.77.2))":
+  "@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2)))(svelte@5.0.0-next.133)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))":
     dependencies:
-      "@sveltejs/vite-plugin-svelte": 3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(sass@1.77.2))
+      "@sveltejs/vite-plugin-svelte": 3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       debug: 4.3.4
       svelte: 5.0.0-next.133
-      vite: 5.2.11(sass@1.77.2)
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
     transitivePeerDependencies:
       - supports-color
 
-  "@sveltejs/vite-plugin-svelte@3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(sass@1.77.2))":
+  "@sveltejs/vite-plugin-svelte@3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))":
     dependencies:
-      "@sveltejs/vite-plugin-svelte-inspector": 2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(sass@1.77.2)))(svelte@5.0.0-next.133)(vite@5.2.11(sass@1.77.2))
+      "@sveltejs/vite-plugin-svelte-inspector": 2.1.0(@sveltejs/vite-plugin-svelte@3.1.0(svelte@5.0.0-next.133)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2)))(svelte@5.0.0-next.133)(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.10
       svelte: 5.0.0-next.133
       svelte-hmr: 0.16.0(svelte@5.0.0-next.133)
-      vite: 5.2.11(sass@1.77.2)
-      vitefu: 0.2.5(vite@5.2.11(sass@1.77.2))
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
+      vitefu: 0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -3465,6 +3474,10 @@ snapshots:
   "@types/nlcst@1.0.4":
     dependencies:
       "@types/unist": 2.0.10
+
+  "@types/node@20.12.12":
+    dependencies:
+      undici-types: 5.26.5
 
   "@types/spotify-web-playback-sdk@0.1.19": {}
 
@@ -3622,7 +3635,7 @@ snapshots:
 
   assertion-error@1.1.0: {}
 
-  astro@4.8.6(sass@1.77.2)(typescript@5.4.5):
+  astro@4.8.6(@types/node@20.12.12)(sass@1.77.2)(typescript@5.4.5):
     dependencies:
       "@astrojs/compiler": 2.8.0
       "@astrojs/internal-helpers": 0.4.0
@@ -3681,8 +3694,8 @@ snapshots:
       tsconfck: 3.0.3(typescript@5.4.5)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.2.11(sass@1.77.2)
-      vitefu: 0.2.5(vite@5.2.11(sass@1.77.2))
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
+      vitefu: 0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2))
       which-pm: 2.2.0
       yargs-parser: 21.1.1
       zod: 3.23.8
@@ -5422,6 +5435,8 @@ snapshots:
 
   ufo@1.5.3: {}
 
+  undici-types@5.26.5: {}
+
   unherit@3.0.1: {}
 
   unified@10.1.2:
@@ -5541,13 +5556,13 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-node@1.6.0(sass@1.77.2):
+  vite-node@1.6.0(@types/node@20.12.12)(sass@1.77.2):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.1
-      vite: 5.2.11(sass@1.77.2)
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
     transitivePeerDependencies:
       - "@types/node"
       - less
@@ -5558,20 +5573,21 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.2.11(sass@1.77.2):
+  vite@5.2.11(@types/node@20.12.12)(sass@1.77.2):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.2
     optionalDependencies:
+      "@types/node": 20.12.12
       fsevents: 2.3.3
       sass: 1.77.2
 
-  vitefu@0.2.5(vite@5.2.11(sass@1.77.2)):
+  vitefu@0.2.5(vite@5.2.11(@types/node@20.12.12)(sass@1.77.2)):
     optionalDependencies:
-      vite: 5.2.11(sass@1.77.2)
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
 
-  vitest@1.6.0(sass@1.77.2):
+  vitest@1.6.0(@types/node@20.12.12)(sass@1.77.2):
     dependencies:
       "@vitest/expect": 1.6.0
       "@vitest/runner": 1.6.0
@@ -5590,9 +5606,11 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.2.11(sass@1.77.2)
-      vite-node: 1.6.0(sass@1.77.2)
+      vite: 5.2.11(@types/node@20.12.12)(sass@1.77.2)
+      vite-node: 1.6.0(@types/node@20.12.12)(sass@1.77.2)
       why-is-node-running: 2.2.2
+    optionalDependencies:
+      "@types/node": 20.12.12
     transitivePeerDependencies:
       - less
       - lightningcss
