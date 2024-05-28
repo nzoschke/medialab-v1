@@ -121,3 +121,13 @@ export interface Waveform {
   data: string;
   player: number /* int */;
 }
+
+export const Messages = async (url: string) => {
+  const res = await fetch(url);
+  return (await res.json()) as Message[];
+};
+
+export const Phrases = async (url: string) => {
+  const msgs = await Messages(url);
+  return msgs.filter((msg) => msg.type == "phrase");
+};

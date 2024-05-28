@@ -53,6 +53,7 @@ export const Timeline = (opts?: Opts) => {
   );
 
   timeline.vars.onComplete = () => {
+    if (timeline.duration() == 0) return;
     state.status = "complete";
   };
 
@@ -112,8 +113,7 @@ export const Timeline = (opts?: Opts) => {
     set opts(o: Opts) {
       opts = o;
     },
-    set progress(p: number) {
-      state.progress = p;
+    progress: (p: number) => {
       timeline.progress(p);
     },
     timeline,

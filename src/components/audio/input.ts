@@ -1,7 +1,18 @@
+import { Cache } from "@components/worker";
+
 export interface Device {
   context: AudioContext;
   node: AudioNode;
   label: String;
+}
+
+export interface DeviceElement {
+  context: AudioContext;
+  el: HTMLAudioElement;
+  node: AudioNode;
+  label: String;
+  pauseResume: () => void;
+  progress: (p: number) => void;
 }
 
 export const Context = async (): Promise<Device> => {
@@ -27,6 +38,29 @@ export const Input = async (label: string | null): Promise<MediaDeviceInfo> => {
   return inputs.find((i) => i.label == label) || inputs[0]!;
 };
 
+export const CreateMedia = async (src: string): Promise<DeviceElement> => {
+  await Cache(src);
+
+  const el = new Audio();
+  el.crossOrigin = "anonymous";
+  el.src = src;
+
+  const { context, node, label } = await Media(el);
+
+  return {
+    context,
+    el,
+    label,
+    node,
+    pauseResume: async () => {
+      el.paused ? await el.play() : el.pause();
+    },
+    progress: (p: number) => {
+      el.currentTime = p * el.duration;
+    },
+  };
+};
+
 export const Media = async (el: HTMLMediaElement): Promise<Device> => {
   const context = new AudioContext();
   const node = context.createGain();
@@ -38,8 +72,8 @@ export const Media = async (el: HTMLMediaElement): Promise<Device> => {
 
   return {
     context,
-    node,
     label: "media",
+    node,
   };
 };
 
@@ -67,20 +101,20 @@ export const Mic = async (label: string | null): Promise<Device> => {
   };
 };
 
-export const Resume = () => {
+export const Gesture = () => {
   return {
-    resume: () => {
+    gesture: () => {
       const ch = new BroadcastChannel("AUDIO");
       ch.postMessage({
-        type: "RESUME",
+        type: "GESTURE",
       });
     },
-    onresume: async (context: AudioContext) => {
+    ongesture: async (cb: () => Promise<void>) => {
       await new Promise<void>((resolve, _) => {
         const ch = new BroadcastChannel("AUDIO");
         ch.onmessage = async ({ data }) => {
-          if (data.type == "RESUME") {
-            await context.resume();
+          if (data.type == "GESTURE") {
+            await cb();
             resolve();
           }
         };

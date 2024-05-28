@@ -1,19 +1,11 @@
 <script lang="ts">
-  import { Media, Mic, Resume } from "@components/audio/input";
-  import type { Message, Phrase } from "@components/meta/analysis";
+  import { CreateMedia, Gesture, type DeviceElement } from "@components/audio/input";
+  import { Phrases, type Message, type Phrase } from "@components/meta/analysis";
   import { Timeline, type Div, type Status } from "@components/timeline";
   import { Visualiser } from "@components/visual/bc";
-  import { Cache } from "@components/worker";
   import { onMount } from "svelte";
 
-  let audio = $state({
-    currentTime: 0,
-    duration: 0,
-    paused: true,
-    src: "/influence.m4a",
-    state: "suspended",
-    volume: 0.7,
-  });
+  let audio!: DeviceElement;
 
   let phrase = $state<Phrase>({
     beat: 0,
@@ -24,6 +16,7 @@
 
   const ui = $state({
     divs: [] as Div[],
+    paused: true,
     progress: 0,
     status: "new" as Status,
   });
@@ -41,22 +34,20 @@
   };
 
   $effect(() => {
-    timeline.progress = ui.progress;
+    timeline.progress(ui.progress);
   });
 
-  const { onresume, resume } = Resume();
+  const { ongesture, gesture } = Gesture();
 
-  const pauseResume = () => {
+  const pauseResume = async () => {
+    audio.progress(ui.progress);
+    audio.pauseResume();
     timeline.pauseResume();
-    audio.paused = !audio.paused;
+    ui.paused = !ui.paused;
   };
 
   onMount(async () => {
-    await Cache(audio.src);
-
-    const res = await fetch("/influence.json");
-    const json = (await res.json()) as Message[];
-    const msgs = json.filter((msg) => msg.type == "phrase");
+    const msgs = await Phrases("/influence.json");
     for (var i = 0; i < msgs.length; i++) {
       const msg = msgs[i];
       timeline.timeline.call(
@@ -69,23 +60,22 @@
       );
     }
 
+    // FIXME: add tween for song end
     ui.divs = timeline.divs();
 
-    const canvas = document.getElementsByTagName("canvas")[0]!;
-    let { context, node } = await Media(document.getElementsByTagName("audio")[0]);
-    await onresume(context);
-    pauseResume();
-    audio.state = context.state;
+    audio = await CreateMedia("/influence.m4a");
+    await ongesture(async () => {
+      audio.context.resume();
+      pauseResume();
+    });
 
-    Visualiser(context, node, canvas);
+    Visualiser(audio.context, audio.node, document.getElementsByTagName("canvas")[0]);
   });
 </script>
 
-<audio src={audio.src} bind:currentTime={audio.currentTime} bind:duration={audio.duration} bind:paused={audio.paused} bind:volume={audio.volume}></audio>
-
 <div class="flex h-screen w-screen flex-col overflow-hidden">
   <div class="flex">
-    <button class="btn btn-square btn-sm {audio.state == 'suspended' || 'hidden'}" onclick={() => resume()}>
+    <button class="btn btn-square btn-sm {ui.status == 'new' || 'hidden'}" onclick={() => gesture()}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
         <path
           fill-rule="evenodd"
@@ -96,12 +86,12 @@
     </button>
 
     <button
-      class="btn btn-square btn-sm {audio.state == 'running' || 'hidden'}"
+      class="btn btn-square btn-sm {ui.status == 'new' && 'hidden'}"
       onclick={() => {
         pauseResume();
       }}
     >
-      {#if audio.paused}
+      {#if ui.paused}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
           <path
             fill-rule="evenodd"
@@ -132,16 +122,10 @@
         max="1"
         step="0.001"
         bind:value={ui.progress}
-        onmousedown={() => {
-          console.log("mouse down");
-          audio.volume = 0;
-        }}
-        onmouseup={() => {
-          console.log("mouse up");
-          audio.currentTime = ui.progress * audio.duration;
-          audio.volume = 0.7;
-        }}
         class="range absolute rounded-none opacity-60"
+        onchange={() => {
+          audio.progress(ui.progress);
+        }}
       />
     </div>
   </div>

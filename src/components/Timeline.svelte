@@ -24,7 +24,7 @@
   };
 
   $effect(() => {
-    timeline.progress = ui.progress;
+    timeline.timeline.progress(ui.progress);
   });
 
   for (var i = 0; i <= 5; i++) {
