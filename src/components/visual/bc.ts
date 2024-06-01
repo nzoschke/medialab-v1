@@ -9,4 +9,6 @@ export const Visualiser = async (context: AudioContext, node: AudioNode, canvas:
       viz.resize(window.innerWidth, window.innerHeight);
     }, 500),
   ).observe(canvas);
+
+  return viz;
 };

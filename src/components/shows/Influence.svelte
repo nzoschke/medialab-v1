@@ -1,11 +1,23 @@
 <script lang="ts">
   import { CreateMedia, Gesture, type DeviceElement } from "@components/audio/input";
-  import { Phrases, type Message, type Phrase } from "@components/meta/analysis";
+  import { Messages, type Message, type Phrase, type Player } from "@components/meta/analysis";
   import { Timeline, type Div, type Status } from "@components/timeline";
+  import type { Viz } from "@components/visual/Butterchurn";
   import { Visualiser } from "@components/visual/bc";
   import { onMount } from "svelte";
 
   let audio!: DeviceElement;
+  let viz: Viz | undefined;
+
+  let player = $state<Player>({});
+
+  let jpg = $derived.by(() => {
+    let data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAmklEQVR42mP8//8/w1IDpgU3AGmLgOgC1D5AZgAACgoKCgoAAJyjOgiAAAAAElFTkSuQmCC";
+    if (player.art?.jpg && player.art.jpg.length > 0) {
+      data = `data:image/jpg;base64,${player.art.jpg}`;
+    }
+    return data;
+  });
 
   let phrase = $state<Phrase>({
     beat: 0,
@@ -47,20 +59,60 @@
   };
 
   onMount(async () => {
-    const msgs = await Phrases("/influence.json");
-    for (var i = 0; i < msgs.length; i++) {
+    const canvas = document.getElementsByTagName("canvas")[0];
+
+    const all = await Messages("/influence.json");
+    player.art = all.find((msg) => msg.type == "art")?.payload;
+
+    let msgs = all.filter((msg) => msg.type == "sys");
+    for (let i = 0; i < msgs.length; i++) {
       const msg = msgs[i];
       timeline.timeline.call(
         (msg: Message) => {
-          console.log(msg.payload);
-          phrase.kind = msg.payload.kind;
+          console.log("sys", msg.ms, msg.payload);
         },
         [msg],
         msg.ms / 1000,
       );
     }
 
-    // FIXME: add tween for song end
+    msgs = all.filter((msg) => msg.type == "cue");
+    for (let i = 0; i < msgs.length; i++) {
+      const msg = msgs[i];
+      timeline.timeline.call(
+        (msg: Message) => {
+          console.log("cue", msg.ms, msg.payload);
+        },
+        [msg],
+        msg.ms / 1000,
+      );
+    }
+
+    msgs = all.filter((msg) => msg.type == "phrase");
+    for (let i = 0; i < msgs.length; i++) {
+      const msg = msgs[i];
+      timeline.timeline.call(
+        (msg: Message) => {
+          console.log("phrase", msg.ms, msg.payload);
+          phrase = msg.payload;
+          if (phrase.beat == 145) {
+            viz?.fetchPreset("https://nzoschke.github.io/vizlab-presets/Presets/Waveform/Wire_Flat_Double/Serge_+_cope-the_drain2.json", 10);
+          }
+
+          if (phrase.beat == 225) {
+            viz?.fetchPreset("https://nzoschke.github.io/vizlab-presets/Presets/Reaction/Mountains/cope_+_flexi-mother-of-whirl_other_kids_toys_.json", 10);
+          }
+          // /Reaction/Liquid_Ripples/flexi-bg_test_6
+          // /Waveform/Wire_Flat_Double/Serge_+_cope-the_drain2
+          // Presets/Reaction/Mountains/cope_+_flexi-mother-of-whirl_other_kids_toys_.json
+          // viz.fetchPreset("https://nzoschke.github.io/vizlab-presets/Presets//Waveform/Wire_Flat_Double/Serge_+_cope-the_drain2.json")
+          // viz.fetchPreset("https://nzoschke.github.io/vizlab-presets/Presets/Waveform/Wire_Flat/224.json")
+        },
+        [msg],
+        msg.ms / 1000,
+      );
+    }
+
     ui.divs = timeline.divs();
 
     audio = await CreateMedia("/influence.m4a");
@@ -69,7 +121,8 @@
       pauseResume();
     });
 
-    Visualiser(audio.context, audio.node, document.getElementsByTagName("canvas")[0]);
+    viz = await Visualiser(audio.context, audio.node, canvas);
+    await viz.fetchPreset("https://nzoschke.github.io/vizlab-presets/Presets/Waveform/Wire_Flat/224.json", 0);
   });
 </script>
 
@@ -129,7 +182,10 @@
       />
     </div>
   </div>
-  <div class="">Phrase: {phrase.kind}</div>
+  <div class="">Phrase: {phrase.kind} {phrase.beat}</div>
+  <div class="pointer-events-none absolute flex h-full w-full items-center justify-center">
+    <img class="h-96 w-96 opacity-35" src={jpg} alt="art" />
+  </div>
   <canvas class="block h-full w-full bg-black"></canvas>
 </div>
 

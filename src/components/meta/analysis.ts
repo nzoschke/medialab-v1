@@ -69,6 +69,13 @@ export interface Phrase {
   player: number /* int */;
 }
 
+export interface Player {
+  art?: Art;
+  beat?: Beat;
+  phrase?: Phrase;
+  track?: Track;
+}
+
 export interface Session {
   active: boolean;
   channel: number /* int */;

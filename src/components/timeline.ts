@@ -76,7 +76,7 @@ export const Timeline = (opts?: Opts) => {
           end,
           start,
           left: (start / timeline.duration()) * 100,
-          width: (duration / timeline.duration()) * 100,
+          width: (Math.max(duration, 1) / timeline.duration()) * 100,
         };
       });
     },
