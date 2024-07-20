@@ -25,6 +25,6 @@ export const findByText = (text: string) => {
 
 export const setup = (url: string) => {
   return {
-    screen: cy.visit(url).wait(100), // hack: wait for components to load and hydrate
+    screen: cy.visit(url).wait(1000), // hack: wait for components to load and hydrate
   };
 };
