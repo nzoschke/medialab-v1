@@ -2,9 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"]
-    }
+      "@components/*": ["src/components/*"],
+      "@mod/*": ["src/mod/*"]
+    },
+    "types": ["vitest/globals"]
   },
-  "exclude": ["node_modules/"],
+  "exclude": ["dist", "node_modules", "src/test/e2e", "cypress.config.ts"],
   "extends": "astro/tsconfigs/strict"
 }
