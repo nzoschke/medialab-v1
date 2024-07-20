@@ -1,0 +1,92 @@
+---
+import { getCollection, getEntry } from "astro:content";
+
+// get entry and render for body
+const { slug } = Astro.params;
+if (slug === undefined) {
+  return Astro.redirect("/404");
+}
+
+const entry = await getEntry("docs", slug);
+if (entry === undefined) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await entry.render();
+
+// get entries and sections for TOC
+let coll = await getCollection("docs");
+
+const draft = Astro.url.searchParams.get("draft") === "t";
+const draftq = draft ? "?draft=t" : "";
+if (!draft) {
+  coll = coll.filter((e) => !e.data.draft);
+}
+
+const entries = coll.sort((a, b) => a.data.order - b.data.order);
+const sections = Array.from(new Set(entries.map((e) => e.data.section))).map((section) => {
+  return {
+    entries: entries.filter((e) => e.data.section == section),
+    section,
+  };
+});
+
+// get next and prev entries for pagination
+const i = entries.findIndex((e) => e.slug == entry.slug);
+const next = entries[i + 1];
+const prev = entries[i - 1];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{entry.data.title}</title>
+  </head>
+  <body>
+    <div class="drawer md:drawer-open">
+      <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content flex h-screen flex-col">
+        <label for="my-drawer-2" class="btn btn-primary drawer-button md:hidden"> Open drawer </label>
+
+        <div class="prose min-w-full flex-grow overflow-scroll p-4">
+          <h1>{entry.data.title}</h1>
+          <Content />
+        </div>
+
+        <div class="join grid grid-cols-2">
+          <a class="btn btn-outline join-item" class:list={[prev || "btn-disabled opacity-0"]} href={`/docs/${prev?.slug}${draftq}`}
+            >{prev && `Prev: ${prev.data.title}`}</a
+          >
+          <a class="btn btn-outline join-item" class:list={[next || "btn-disabled opacity-0"]} href={`/docs/${next?.slug}${draftq}`}
+            >{next && `Next: ${next.data.title}`}</a
+          >
+        </div>
+      </div>
+
+      <div class="drawer-side">
+        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+        <ul class="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
+          {
+            sections.map((s) => (
+              <li>
+                <h2 class="menu-title">{s.section}</h2>
+                <ul>
+                  {s.entries.map((e) => (
+                    <li>
+                      <a href={`/docs/${e.slug}${draftq}`}>{e.data.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
