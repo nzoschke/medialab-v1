@@ -121,7 +121,12 @@
             <div>
               <div class="carousel carousel-center h-64 cursor-pointer rounded-box">
                 {#each collection.playlists as p, i}
-                  <button class="group carousel-item relative" onclick={() => {playlist = collection.playlists[i]!}}>
+                  <button
+                    class="group carousel-item relative"
+                    onclick={() => {
+                      playlist = collection.playlists[i]!;
+                    }}
+                  >
                     <div class="btn btn-square btn-primary absolute bottom-0 right-0 m-2 hidden items-center justify-center group-hover:flex">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                         <path

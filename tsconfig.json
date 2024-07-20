@@ -5,6 +5,6 @@
       "@components/*": ["src/components/*"]
     }
   },
-  "extends": "astro/tsconfigs/strict",
-  "exclude": ["node_modules/"]
+  "exclude": ["node_modules/"],
+  "extends": "astro/tsconfigs/strict"
 }

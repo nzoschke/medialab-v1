@@ -1,6 +1,5 @@
 /// <reference types="@types/spotify-web-playback-sdk"/>
 
-import { type Devices } from "@spotify/web-api-ts-sdk";
 import { type Options, State } from "@components/audio/player";
 
 export const Player = (opts?: Options) => {
