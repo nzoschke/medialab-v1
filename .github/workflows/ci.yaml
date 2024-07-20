@@ -1,5 +1,7 @@
 name: ci
-on: push
+on:
+  pull_request:
+    branches: ["main"]
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
@@ -8,6 +10,8 @@ jobs:
         uses: actions/checkout@v4
       - name: pnpm
         run: npm install -g pnpm@9
+      - name: test
+        run: pnpm run test
       - name: cypress
         uses: cypress-io/github-action@v6
         with:
