@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: ["main"]
 jobs:
-  cypress-run:
+  ci:
     runs-on: ubuntu-22.04
     steps:
       - name: checkout
