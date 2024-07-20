@@ -2,14 +2,12 @@
   "author": "JukeLab",
   "description": "Jukebox happy hour. 5 to 10 PM. Driftwood Bar, SF.",
   "guid": "AAAAllZmbFJcGJes8n/Zv2IzUp440x6a",
-  "link": "https://open.spotify.com/playlist/6ITE4LSLba67IWbrI9eeL1",
-  "title": "JukeLab 2023",
-  "uri": "spotify:playlist:6ITE4LSLba67IWbrI9eeL1",
   "images": [
     "https://mosaic.scdn.co/640/ab67616d00001e025e7d92681d4891c4b637c630ab67616d00001e02869df273a6f34f759b426aceab67616d00001e0295d8583bba8f3cd794fa5baeab67616d00001e02fbfb68023efd979aec1cc925",
     "https://mosaic.scdn.co/300/ab67616d00001e025e7d92681d4891c4b637c630ab67616d00001e02869df273a6f34f759b426aceab67616d00001e0295d8583bba8f3cd794fa5baeab67616d00001e02fbfb68023efd979aec1cc925",
     "https://mosaic.scdn.co/60/ab67616d00001e025e7d92681d4891c4b637c630ab67616d00001e02869df273a6f34f759b426aceab67616d00001e0295d8583bba8f3cd794fa5baeab67616d00001e02fbfb68023efd979aec1cc925"
   ],
+  "link": "https://open.spotify.com/playlist/6ITE4LSLba67IWbrI9eeL1",
   "playlists": [
     {
       "author": "Missy Elliott",
@@ -22637,5 +22635,7 @@
         }
       ]
     }
-  ]
+  ],
+  "title": "JukeLab 2023",
+  "uri": "spotify:playlist:6ITE4LSLba67IWbrI9eeL1"
 }

@@ -1,6 +1,5 @@
 {
-  "short_name": "",
-  "name": "",
+  "background_color": "#fafafa",
   "icons": [
     {
       "src": "icon.svg",
@@ -8,7 +7,8 @@
       "sizes": "192x192"
     }
   ],
+  "name": "",
+  "short_name": "",
   "start_url": "/?utm_source=homescreen",
-  "background_color": "#fafafa",
   "theme_color": "#fafafa"
 }
