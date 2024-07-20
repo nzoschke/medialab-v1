@@ -1,0 +1,19 @@
+---
+import { Code as CodeC } from "astro:components";
+import fs from "node:fs/promises";
+import { join } from "node:path";
+import type { BuiltinLanguage, LanguageRegistration, SpecialLanguage } from "shiki";
+
+interface Props {
+  file: string;
+  lang: BuiltinLanguage | SpecialLanguage | LanguageRegistration;
+}
+
+const { file, lang } = Astro.props;
+
+// TODO: allow list dirs and extensions to avoid traversal or leaking .env
+const dir = join(import.meta.dirname, "..", ".."); // project root
+const code = await fs.readFile(join(dir, file), "utf-8");
+---
+
+<CodeC {code} {lang} />

@@ -1,0 +1,11 @@
+---
+import { getCollection } from "astro:content";
+
+const coll = await getCollection("docs");
+const entries = coll.sort((a, b) => a.data.order - b.data.order);
+const path = `/docs/${entries[0].slug}`;
+
+path; // HACK: https://github.com/withastro/language-tools/issues/476
+
+return Astro.redirect(path);
+---
